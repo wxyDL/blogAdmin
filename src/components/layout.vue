@@ -14,9 +14,10 @@
                         <img
                             src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
                             alt="">
+                        <p>欢迎:admin</p>
                         <el-dropdown>
                           <span class="el-dropdown-link">
-                            下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+                            <i class="el-icon-arrow-down el-icon--right"></i>
                           </span>
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item>个人中心</el-dropdown-item>
@@ -95,10 +96,17 @@ export default {
         width: 150px;
         height: 100%;
         border-left: 1px solid gray;
-        
+        display: flex;
+        align-items: center;
+        padding-left: 5px;
         img {
+            display: block;
             width: 50px;
             height: 50px;
+            border-radius: 50%;
+        }
+        .el-dropdown{
+            display: block;
         }
     }
 }

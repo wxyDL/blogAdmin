@@ -7,16 +7,18 @@
                 background-color="rgb(48,65,86)"
                 text-color="#ffffff"
                 :collapse-transition="false"
+                :default-active="activeIndex"
                 unique-opened
                 router
                 :collapse="isCollapse"
+                @select="handleIndex"
             >
-                <el-submenu class="collapse" :index="item.id.toString()" v-if="item.children && item.children.length > 0" :key="item.id">
+                <el-submenu
+                    class="collapse"
+                    :index="item.id.toString()"
+                    v-if="item.children && item.children.length > 0"
+                    :key="item.id">
                     <template slot="title"><i class="el-icon-message"></i>{{ item.name }}</template>
-<!--                    <el-menu-item-group>-->
-<!--                        <el-menu-item v-for="k in item.children" :index="k.pathUrl" :key="k.id">{{ k.name }}-->
-<!--                        </el-menu-item>-->
-<!--                    </el-menu-item-group>-->
                     <label>
                         <v-menuTree :data="item.children"></v-menuTree>
                     </label>
@@ -34,24 +36,41 @@ export default {
     components: {},
     computed: {},
     created() {
+        let activeIndex = localStorage.getItem("activeIndex")
+        if (activeIndex) {
+            this.activeIndex = activeIndex
+            return
+        }
+        if (this.data[0].children && this.data[0].length > 0) {
+            this.activeIndex = this.data[0].children.pathUrl
+        } else {
+            this.activeIndex = this.data[0].pathUrl
+        }
+        localStorage.setItem("activeIndex", this.activeIndex)
     },
     data() {
         return {
+            activeIndex: "",
         }
     },
-    methods: {}
+    methods: {
+        handleIndex (key) {
+            console.log(key)
+            localStorage.setItem("activeIndex", key)
+        }
+    }
 }
 </script>
-
 <style lang="scss" scoped>
 .el-menu{
     border-right: 0 !important;
 }
 .isCollapse{
-    width: 200px;
+    .el-menu--collapse{
+        width: 100px;
+    }
     .el-menu{
         .el-submenu, .el-menu--popup, .el-menu-item{
-            width: 100px;
             text-align: center;
         }
     }

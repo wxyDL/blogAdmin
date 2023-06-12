@@ -31,6 +31,6 @@ export default {
 
 <style lang="scss" scoped>
 .isCollapse{
-    width: 200px;
+    //width: 200px;
 }
 </style>
