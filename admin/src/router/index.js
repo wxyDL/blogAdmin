@@ -5,14 +5,26 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    redirect: '/homepage',
+    component: () => import('@/components/layout/index.vue'),
+    children: [
+      {
+        path: '/homepage',
+        name: '系统主页',
+        component: () => import('@/views/home/index.vue')
+      }
+    ]
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('@/views/login/index.vue')
   },
   {
-    path: '/home',
-    name: 'home',
-    component: () => import('@/views/home/index.vue')
+    path: '*',
+    name: '404',
+    component: () => import('@/views/404.vue')
   }
 ]
 
