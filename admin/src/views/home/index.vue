@@ -1,5 +1,5 @@
 <template>
-    <div class="user-box">home</div>
+    <div class="user-box">home1</div>
 </template>
 
 <script>
