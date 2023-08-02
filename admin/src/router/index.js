@@ -11,8 +11,19 @@ const routes = [
     children: [
       {
         path: '/homepage',
-        name: '系统主页',
-        component: () => import('@/views/home/index.vue')
+        name: '首页',
+        component: () => import('@/views/home/index.vue'),
+        meta: {
+          title: '首页',
+        }
+      },
+      {
+        path: '/personal/center',
+        name: '个人中心',
+        component: () => import('@/views/personalCenter/index.vue'),
+        meta: {
+          title: '个人中心'
+        }
       }
     ]
   },

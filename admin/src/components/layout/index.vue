@@ -5,14 +5,32 @@
         <el-header class="el-header">
             <!-- 应用名称 -->
             <span style="width: 200px">Welcome Back</span>
-            <div class="header-box"></div>
+            <div class="header-box">
+                <div class="fold_switch">
+                    <i v-if="!collapse" class="el-icon-s-fold" @click="collapseClick()"></i>
+                    <i v-if="collapse" class="el-icon-s-unfold" @click="collapseClick()"></i>
+                </div>
+                <div class="personal_center">
+                    <img src="@/assets/image/头像.svg" alt="">
+                    <el-dropdown @command="handleCommand">
+                          <span class="el-dropdown-link" style="color: #FFFFFF">
+                            test<i class="el-icon-arrow-down el-icon--right"></i>
+                          </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="center">个人中心</el-dropdown-item>
+                            <el-dropdown-item command="home">首页</el-dropdown-item>
+                            <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
+            </div>
         </el-header>
         <el-container>
             <!-- 左侧菜单栏部分 -->
-            <el-aside class="el-aside" style="width: 200px">
+            <el-aside :style="asideWidth">
                 <el-scrollbar>
                     <el-menu class="el-menu"
-                             :collapse="false"
+                             :collapse="collapse"
                              background-color="#32323a"
                              :unique-opened="true"
                              :default-active="$route.path"
@@ -25,6 +43,7 @@
             </el-aside>
             <!-- 右侧主题页面内容展示 -->
             <el-main class="el-mian">
+                <v-breadcrumb></v-breadcrumb>
                 <!-- 路由页面 -->
                 <router-view></router-view>
             </el-main>
@@ -34,61 +53,92 @@
 
 <script>
 import MenuTree from '@/components/layout/components/MenuTree.vue'
+import breadcrumb from '@/components/breadcrumb/index.vue'
+
 export default {
     components: {
-        MenuTree
+        MenuTree,
+        'v-breadcrumb': breadcrumb
     },
     data() {
         return {
-            menuList:[
+            // 折叠开关
+            collapse: false,
+            // 侧边栏宽度
+            asideWidth: 'width: 200px',
+            menuList: [
                 {
-                    id:"1",
-                    parentid:'0',
-                    name:'系统主页',
-                    icon:'el-icon-message',
-                    url:'/homepage',
+                    id: "1",
+                    parentid: '0',
+                    name: '系统主页',
+                    icon: 'el-icon-message',
+                    url: '/homepage',
                 },
                 {
-                    id:"2",
-                    parentid:'0',
-                    name:'学生管理',
-                    icon:'el-icon-message',
-                    children:[
+                    id: "2",
+                    parentid: '0',
+                    name: '学生管理',
+                    icon: 'el-icon-message',
+                    children: [
                         {
-                            id:"3",
-                            parentid:'2',
-                            name:'信息管理',
-                            icon:'el-icon-message',
-                            children:[
+                            id: "3",
+                            parentid: '2',
+                            name: '信息管理',
+                            icon: 'el-icon-message',
+                            children: [
                                 {
-                                    id:"4",
-                                    parentid:'2',
-                                    name:'密码修改',
-                                    icon:'el-icon-message',
-                                    url:'/password'
+                                    id: "4",
+                                    parentid: '2',
+                                    name: '密码修改',
+                                    icon: 'el-icon-message',
+                                    url: '/password'
                                 }
                             ]
                         },
                         {
-                            id:"5",
-                            parentid:'2',
-                            name:'成绩管理',
-                            icon:'el-icon-message',
-                            url:'/grade',
+                            id: "5",
+                            parentid: '2',
+                            name: '成绩管理',
+                            icon: 'el-icon-message',
+                            url: '/grade',
                         }
                     ]
                 },
                 {
-                    id:"6",
-                    parentid:'0',
-                    name:'课程管理',
-                    icon:'',
-                    url:'/course',
-                }
+                    id: "6",
+                    parentid: '0',
+                    name: '个人中心',
+                    icon: 'el-icon-user',
+                    url: '/personal/center',
+                },
             ],
         }
     },
-    
+    methods: {
+        // 是否折叠侧边栏
+        collapseClick() {
+            this.collapse = !this.collapse
+            if (!this.collapse) {
+                this.asideWidth = 'width: 200px'
+            } else {
+                this.asideWidth = 'width: 50px'
+            }
+        },
+        handleCommand (event) {
+            console.log(event)
+            switch (event) {
+                case 'center':
+                    this.$router.push('/personal/center')
+                    break
+                case 'home':
+                    this.$router.push('/homePage')
+                    break
+                case 'logout':
+                    this.$router.push('/login')
+                    break
+            }
+        }
+    }
 }
 </script>
 
@@ -98,12 +148,14 @@ export default {
     padding: 0px;
     margin: 0px;
     height: 100vh;
-    .el-scrollbar{
-        ::v-deep .el-scrollbar__wrap{
+    
+    .el-scrollbar {
+        ::v-deep .el-scrollbar__wrap {
             overflow: hidden;
         }
     }
 }
+
 .el-header {
     /* 顶部部分的高度(默认60px) */
     background-color: #0077d5;
@@ -113,20 +165,43 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    .header-box{
+    
+    .header-box {
         width: 100%;
         height: 100%;
+        display: flex;
+        justify-content: space-between;
+        .fold_switch {
+            line-height: 60px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+        .personal_center{
+            display: flex;
+            align-items: center;
+            img{
+                width: 60px;
+                height: 60px;
+            }
+        }
     }
 }
+
 .el-aside {
-    width: 200px;
     background-color: #32323a;
     min-height: calc(100vh - 60px);
+    
+    ::v-deep .el-icon-message {
+        margin-right: 7px;
+    }
 }
 
-.el-menu {
+.aside_200 {
     width: 200px;
-    min-height:100%;
+}
+
+.aside_50 {
+    width: 50px;
 }
 
 .el-menu span {
@@ -137,6 +212,6 @@ export default {
     background-color: #eaedf1;
     padding: 0px;
     margin: 0px;
-    height:calc(100vh - 60px);
+    height: calc(100vh - 60px);
 }
 </style>
