@@ -7,8 +7,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/fonts/iconfont.css'
 import '@/assets/fonts/iconfont'
 import '@/assets/style.scss'
+import yTable from '@/components/y-table/src/index.vue'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.component('yTable', yTable)
 
 new Vue({
   router,

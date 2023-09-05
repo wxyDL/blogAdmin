@@ -27,6 +27,30 @@ const routes = [
         meta: {
           title: '个人中心'
         }
+      },
+      {
+        path: '/article/create',
+        name: '创建文章',
+        component: () => import('@/views/articleManage/articleCreate/index.vue'),
+        meta: {
+          title: '创建文章'
+        }
+      },
+      {
+        path: '/article/data',
+        name: '文章列表',
+        component: () => import('@/views/articleManage/articleData/index.vue'),
+        meta: {
+          title: '文章列表'
+        }
+      },
+      {
+        path: '/article/classification',
+        name: '文章分类',
+        component: () => import('@/views/classificationManage/articleClassification/index.vue'),
+        meta: {
+          title: '文章分类'
+        }
       }
     ]
   },

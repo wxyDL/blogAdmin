@@ -77,30 +77,37 @@ export default {
                 {
                     id: "2",
                     parentid: '0',
-                    name: '学生管理',
+                    name: '文章管理',
                     icon: 'el-icon-message',
                     children: [
                         {
                             id: "3",
                             parentid: '2',
-                            name: '信息管理',
+                            name: '创建文章',
                             icon: 'el-icon-message',
-                            children: [
-                                {
-                                    id: "4",
-                                    parentid: '2',
-                                    name: '密码修改',
-                                    icon: 'el-icon-message',
-                                    url: '/password'
-                                }
-                            ]
+                            url: '/article/create'
                         },
                         {
                             id: "5",
-                            parentid: '2',
-                            name: '成绩管理',
+                            parentid: '3',
+                            name: '文章列表',
                             icon: 'el-icon-message',
-                            url: '/grade',
+                            url: '/article/data',
+                        }
+                    ]
+                },
+                {
+                    id: "3",
+                    parentid: '0',
+                    name: '分类管理',
+                    icon: 'el-icon-user',
+                    children: [
+                        {
+                            id: "0",
+                            parentid: '3',
+                            name: '文章分类',
+                            icon: 'el-icon-message',
+                            url: '/article/classification',
                         }
                     ]
                 },
