@@ -10,7 +10,7 @@ export function tableModel () {
         },
         {
             label: '分类名称',
-            prop: 'classificationName'
+            prop: 'className'
         },
         {
             label: '描述',
@@ -18,7 +18,7 @@ export function tableModel () {
         },
         {
             label: '操作',
-            type: 'index'
+            slot: 'option1'
         },
     ]
 }

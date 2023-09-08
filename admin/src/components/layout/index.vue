@@ -71,27 +71,27 @@ export default {
                     id: "1",
                     parentid: '0',
                     name: '系统主页',
-                    icon: 'el-icon-message',
+                    icon: 'el-icon-s-home',
                     url: '/homepage',
                 },
                 {
                     id: "2",
                     parentid: '0',
                     name: '文章管理',
-                    icon: 'el-icon-message',
+                    icon: 'el-icon-document',
                     children: [
                         {
                             id: "3",
                             parentid: '2',
                             name: '创建文章',
-                            icon: 'el-icon-message',
+                            icon: 'el-icon-edit-outline',
                             url: '/article/create'
                         },
                         {
                             id: "5",
                             parentid: '3',
                             name: '文章列表',
-                            icon: 'el-icon-message',
+                            icon: 'el-icon-tickets',
                             url: '/article/data',
                         }
                     ]
@@ -100,7 +100,7 @@ export default {
                     id: "3",
                     parentid: '0',
                     name: '分类管理',
-                    icon: 'el-icon-user',
+                    icon: 'el-icon-film',
                     children: [
                         {
                             id: "0",
@@ -112,7 +112,14 @@ export default {
                     ]
                 },
                 {
-                    id: "6",
+                    id: "4",
+                    parentid: '0',
+                    name: '评论留言',
+                    icon: 'el-icon-s-comment',
+                    url: '/comment/manage',
+                },
+                {
+                    id: "5",
                     parentid: '0',
                     name: '个人中心',
                     icon: 'el-icon-user',

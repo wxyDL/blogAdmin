@@ -51,6 +51,14 @@ const routes = [
         meta: {
           title: '文章分类'
         }
+      },
+      {
+        path: '/comment/manage',
+        name: '评论留言',
+        component: () => import('@/views/comment/index.vue'),
+        meta: {
+          title: '评论留言'
+        }
       }
     ]
   },

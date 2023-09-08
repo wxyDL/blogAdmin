@@ -8,6 +8,9 @@ import '@/assets/fonts/iconfont.css'
 import '@/assets/fonts/iconfont'
 import '@/assets/style.scss'
 import yTable from '@/components/y-table/src/index.vue'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+Vue.use(mavonEditor)
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.component('yTable', yTable)

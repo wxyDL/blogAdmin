@@ -26,6 +26,7 @@
 }
 .w200{
   width: 200px;
+  margin-right: 20px;
 }
 .table-box{
   margin: 20px 0;
@@ -34,4 +35,13 @@
   width: calc(100% - 5px);
   display: flex;
   justify-content: flex-end;
+}
+.fontBlue{
+  color: rgb(64,158,255);
+  cursor: pointer;
+  margin-right: 20px;
+}
+.fontRed{
+  color: rgb(245,108,108);
+  cursor: pointer;
 }

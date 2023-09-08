@@ -29,12 +29,57 @@
                     type="index"
                     width="55">
                 </el-table-column>
+                <el-table-column
+                    :label="col.label"
+                    v-if="col.slot === 'option1'"
+                    :width="col.width">
+                    <template slot-scope="scope">
+                        <slot name="option1" :scope="scope"></slot>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    :label="col.label"
+                    v-else-if="col.slot === 'option2'"
+                    :width="col.width">
+                    <template slot-scope="scope">
+                        <slot name="option2" :scope="scope"></slot>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    :label="col.label"
+                    v-else-if="col.slot === 'option3'"
+                    :width="col.width">
+                    <template slot-scope="scope">
+                        <slot name="option3" :scope="scope"></slot>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    :key="col.prop"
+                    v-else-if="col.type === undefined && col.render !== undefined"
+                    :label="col.label"
+                    :id="col.prop"
+                    :align="col.align"
+                    :width="col.width"
+                    :min-width="col.minWidth"
+                    :render-header="col.renderHeader"
+                    :sortable="col.sortable"
+                >
+                    <template slot-scope="scope">
+                        <v-render
+                            :render="col.render"
+                            :row="scope"
+                            :column="scope.row.column"
+                            :index="scope.$index"
+                        ></v-render>
+                    </template>
+                </el-table-column>
             </template>
         </el-table>
     </div>
 </template>
 
 <script>
+import render from '@/components/y-table/src/expand'
 export default {
     name: 'yTable',
     props: {
@@ -56,6 +101,9 @@ export default {
                 return true;
             }
         }
+    },
+    components: {
+        'v-render': render
     },
     computed: {},
     created() {
